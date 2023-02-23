@@ -1,7 +1,7 @@
-import 'package:client/authentication/login-option.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:rational_flutter_lib/authentication/login-option.dart';
 
 class AuthenticationForm extends StatefulWidget {
   const AuthenticationForm({Key? key}) : super(key: key);
@@ -19,11 +19,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _loginOptionHasError = false;
 
-  List<LoginOption> loginOptions = [
-    LoginOption.Default,
-    LoginOption.SSO,
-    LoginOption.Social
-  ];
+  List<LoginOption> loginOptions = [LoginOption.Default, LoginOption.SSO, LoginOption.Social];
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +55,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                           labelText: 'Login Option',
                           hintText: 'Select Login',
                         ),
-                        validator: FormBuilderValidators.compose(
-                            [FormBuilderValidators.required()]),
+                        validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                         items: loginOptions
                             .map((option) => DropdownMenuItem(
                                   alignment: AlignmentDirectional.center,
@@ -70,10 +65,8 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                             .toList(),
                         onChanged: (val) {
                           setState(() {
-                            _loginOptionHasError = !(_formKey
-                                    .currentState?.fields['login-option']
-                                    ?.validate() ??
-                                false);
+                            _loginOptionHasError =
+                                !(_formKey.currentState?.fields['login-option']?.validate() ?? false);
                           });
                         },
                         valueTransformer: (val) => val?.toString(),
@@ -81,20 +74,16 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                       FormBuilderTextField(
                         name: 'login-username',
                         autocorrect: false,
-                        validator: FormBuilderValidators.compose(
-                            [FormBuilderValidators.required()]),
-                        decoration:
-                            const InputDecoration(labelText: 'Username'),
+                        validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                        decoration: const InputDecoration(labelText: 'Username'),
                       ),
                       FormBuilderTextField(
                         name: 'login-password',
                         obscureText: true,
                         enableSuggestions: false,
                         autocorrect: false,
-                        validator: FormBuilderValidators.compose(
-                            [FormBuilderValidators.required()]),
-                        decoration:
-                            const InputDecoration(labelText: 'Password'),
+                        validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                        decoration: const InputDecoration(labelText: 'Password'),
                       )
                     ],
                   ),
